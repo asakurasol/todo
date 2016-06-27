@@ -8,4 +8,4 @@ A very very simple and rough to-do application that has the following features:
 - Custom adapter to handle Task data type
 - Support for completion due dates for todo items (default to tomorrow)
 
-![alt tag](http://imgur.com/myHLoA7)
+![alt tag](http://imgur.com/myHLoA7.gif)
