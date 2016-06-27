@@ -3,8 +3,8 @@ package com.example.derekwu.todo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -14,11 +14,10 @@ import android.widget.Toast;
 import com.activeandroid.query.Select;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Task> items;
+    ArrayList<Task> items;
     ArrayAdapter<Task> itemsAdapter;
     ListView lvItems;
     private final int REQUEST_CODE = 20; //Edit Task
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         lvItems = (ListView) findViewById(R.id.lvItems);
-        List<Task> items = new Select().from(Task.class).limit(100).execute();
+        items = new ArrayList(new Select().from(Task.class).limit(100).execute());
         itemsAdapter = new TasksAdapter(this, items);
         lvItems.setAdapter(itemsAdapter);
         setupListEventListener();
@@ -40,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
             // Extract name value from result extras
             String newText = data.getExtras().getString("newText");
             int itemPos = data.getExtras().getInt("itemPos");
-//            items.set(itemPos, newText);
+            Task edittedTask = items.get(itemPos);
+            edittedTask.name = newText;
+            edittedTask.save();
             itemsAdapter.notifyDataSetChanged();
-//            writeItems();
             Toast.makeText(this, "Updated Task " + newText, Toast.LENGTH_SHORT).show();
         }
     }
@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
                     public boolean onItemLongClick(AdapterView<?> adapter, View item, int pos, long id){
-                editItem(items.get(pos));
+                Log.d("ITEM",items.toString());
+                editItem(items.get(pos), pos);
                 return true;
             }
         });
@@ -67,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
         etNewItem.setText("");
     }
 
-    public void editItem(Task taskItem) {
+    public void editItem(Task taskItem, int itemPos) {
         Intent i = new Intent(MainActivity.this, EditItemActivity.class);
         i.putExtra("itemText", taskItem.name);
-        i.putExtra("itemId", taskItem.getId());
+        i.putExtra("itemPos", itemPos);
         startActivityForResult(i, REQUEST_CODE);
     }
 }

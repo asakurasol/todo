@@ -7,14 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by Derekwu on 6/27/16.
  */
 
 public class TasksAdapter extends ArrayAdapter<Task> {
-    public TasksAdapter(Context context, List<Task> tasks) {
+    public TasksAdapter(Context context, ArrayList<Task> tasks) {
         super(context, 0, tasks);
     }
 
