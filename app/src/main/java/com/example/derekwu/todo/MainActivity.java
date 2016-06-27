@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.activeandroid.query.Select;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,12 +39,14 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             // Extract name value from result extras
             String newText = data.getExtras().getString("newText");
+            Date newDate = new Date(data.getExtras().getString("newDate"));
             int itemPos = data.getExtras().getInt("itemPos");
             Task edittedTask = items.get(itemPos);
             edittedTask.name = newText;
+            edittedTask.date = newDate;
             edittedTask.save();
             itemsAdapter.notifyDataSetChanged();
-            Toast.makeText(this, "Updated Task " + newText, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Updated Task " + newDate.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -71,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     public void editItem(Task taskItem, int itemPos) {
         Intent i = new Intent(MainActivity.this, EditItemActivity.class);
         i.putExtra("itemText", taskItem.name);
+        i.putExtra("itemDate", taskItem.date.toString());
         i.putExtra("itemPos", itemPos);
         startActivityForResult(i, REQUEST_CODE);
     }

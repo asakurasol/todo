@@ -10,11 +10,11 @@
         android:name="com.activeandroid.app.Application"
         android:theme="@style/AppTheme">
         <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="6" />
+        <meta-data
             android:name="AA_DB_NAME"
             android:value="RestClient.db" />
-        <meta-data
-            android:name="AA_DB_VERSION"
-            android:value="3" />
         <activity android:name=".MainActivity">
 
             <intent-filter>

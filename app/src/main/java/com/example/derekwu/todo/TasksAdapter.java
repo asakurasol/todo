@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Derekwu on 6/27/16.
@@ -28,9 +30,14 @@ public class TasksAdapter extends ArrayAdapter<Task> {
         }
         // Lookup view for data population
         TextView taskName = (TextView) convertView.findViewById(R.id.taskName);
+        TextView taskDate = (TextView) convertView.findViewById(R.id.taskDate);
         // Populate the data into the template view using the data object
         taskName.setText(task.name);
-
+        if (task.date == null) {
+            task.date = new Date();
+            task.save();
+        }
+        taskDate.setText("Deadline: " + new SimpleDateFormat("MM-dd-yyyy").format(task.date));
         // Return the completed view to render on screen
         return convertView;
     }
