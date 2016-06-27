@@ -18,7 +18,8 @@
         android:onClick="onAddItem"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textSize="35dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -29,7 +30,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/btnAddItem"
-        android:layout_toStartOf="@+id/btnAddItem" />
+        android:layout_toStartOf="@+id/btnAddItem"
+        android:textSize="30dp"
+        android:textColor="#333333" />
 
     <ListView
         android:layout_width="wrap_content"

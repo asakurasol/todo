@@ -17,13 +17,14 @@
         android:layout_centerHorizontal="true">
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText"
             android:layout_above="@+id/saveEdit"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="63dp" />
+            android:layout_marginBottom="63dp"
+            android:textSize="40dp" />
         <DatePicker
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +41,8 @@
             android:id="@+id/saveEdit"
             android:onClick="onSubmit"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:textSize="35dp" />
 
     </LinearLayout>
 
